@@ -28,44 +28,44 @@
 *Analysez au moins 3 solutions existantes (sites web, applications, assistants) qui proposent des services similaires à votre projet.*
 Resp. Arnaud
 
-### 3.1 Solution 1 : [Nom]
+### 3.1 Solution 1 : Joe AI
 
 | Critère | Description |
 |:---|:---|
-| **Nom / Lien** | |
-| **Type** | ☐ Site web ☐ Application mobile ☐ Chatbot ☐ Assistant vocal |
-| **Fonctionnalités principales** | |
-| **Sources de données utilisées** | |
-| **Technologies présumées** | |
-| **Points forts** | |
-| **Points faibles / limites** | |
-| **Ce que nous pourrions améliorer** | |
+| **Nom / Lien** | Joe AI (getjoe-ai.com) |
+| **Type** | ☐ Site web ☐ Application mobile ☑ Chatbot ☑ Assistant vocal |
+| **Fonctionnalités principales** | Qualification des leads, prise de rendez-vous, support administratif et technique, réponses instantanées 24/7 (téléphone, SMS, WhatsApp, mail). |
+| **Sources de données utilisées** | Bases de données de l'agence (CRM, annonces immobilières, agendas). |
+| **Technologies présumées** | LLM conversationnel, Speech-to-Text / Text-to-Speech pour la voix, intégrations API. |
+| **Points forts** | Agent vocal très performant, automatisation poussée de la communication (appels entrants/sortants), intégration CRM fluide. |
+| **Points faibles / limites** | Orienté principalement professionnels/agences (B2B), approche très transactionnelle, manque potentiellement d'outils analytiques visuels pour l'utilisateur. |
+| **Ce que nous pourrions améliorer** | Proposer une interface utilisateur mixte (conversationnelle et visuelle) intégrant l'analyse de données de marché (DVF). |
 
-### 3.2 Solution 2 : [Nom]
-
-| Critère | Description |
-|:---|:---|
-| **Nom / Lien** | |
-| **Type** | ☐ Site web ☐ Application mobile ☐ Chatbot ☐ Assistant vocal |
-| **Fonctionnalités principales** | |
-| **Sources de données utilisées** | |
-| **Technologies présumées** | |
-| **Points forts** | |
-| **Points faibles / limites** | |
-| **Ce que nous pourrions améliorer** | |
-
-### 3.3 Solution 3 : [Nom]
+### 3.2 Solution 2 : Keyzia
 
 | Critère | Description |
 |:---|:---|
-| **Nom / Lien** | |
-| **Type** | ☐ Site web ☐ Application mobile ☐ Chatbot ☐ Assistant vocal |
-| **Fonctionnalités principales** | |
-| **Sources de données utilisées** | |
-| **Technologies présumées** | |
-| **Points forts** | |
-| **Points faibles / limites** | |
-| **Ce que nous pourrions améliorer** | |
+| **Nom / Lien** | Keyzia (keyzia.fr) |
+| **Type** | ☑ Site web ☐ Application mobile ☑ Chatbot ☐ Assistant vocal |
+| **Fonctionnalités principales** | Cartographie interactive, estimation immobilière assistée par l'IA, centralisation des données (DPE, etc.), aide à la prospection foncière. |
+| **Sources de données utilisées** | Open data immobilière (DVF, DPE, règles d'urbanisme, cadastre), plus de 1000 points de données par adresse. |
+| **Technologies présumées** | IA d'analyse géospatiale, LLM, bases de données structurées et vectorielles. |
+| **Points forts** | Très orienté data (open data, DVF), cartographie puissante, véritable outil d'aide à la décision immobilière. |
+| **Points faibles / limites** | Outil d'analyse B2B complexe, moins orienté vers un dialogue simple et naturel pour un acheteur B2C. |
+| **Ce que nous pourrions améliorer** | Allier cette richesse de données open-data (notamment DVF) à une interface purement conversationnelle (chatbot) très simple d'accès pour le grand public. |
+
+### 3.3 Solution 3 : Livie
+
+| Critère | Description |
+|:---|:---|
+| **Nom / Lien** | Livie (livie.info) |
+| **Type** | ☐ Site web ☐ Application mobile ☑ Chatbot ☐ Assistant vocal |
+| **Fonctionnalités principales** | Accueil des visiteurs sur site web, réponses aux FAQ, qualification des prospects, planification de visites, IA multilingue. |
+| **Sources de données utilisées** | Données de l'agence (portefeuille de biens, agenda, FAQ interne). |
+| **Technologies présumées** | LLM classique, RAG (Retrieval-Augmented Generation) sur les documents internes, intégration widget web. |
+| **Points forts** | Très facile à intégrer sur un site web existant, disponible 24/7, personnalisable selon la marque de l'agence. |
+| **Points faibles / limites** | Chatbot "classique" centré sur les biens en base, mais limité face à des requêtes immobilières métier plus poussées (ex: analyse de marché, estimation précise). |
+| **Ce que nous pourrions améliorer** | Ajouter une vraie dimension d'estimation intelligente et d'analyse de marché en temps réel, plutôt que simplement de la réponse au client. |
 
 *(Ajoutez autant de lignes que nécessaire)*
 
@@ -73,8 +73,15 @@ Resp. Arnaud
 
 *Quels sont les points communs entre ces solutions ? Quelles sont les lacunes du marché que votre projet pourrait combler ?*
 
+**Points communs :**
+- Ces solutions visent toutes à **automatiser la relation client** (qualification, prise de rendez-vous, support 24/7) dans le secteur immobilier.
+- Elles s'adressent majoritairement aux **professionnels de l'immobilier** (agents, mandataires, syndics) dans une logique B2B pour leur faire gagner du temps.
+- Elles s'appuient fortement sur l'intégration avec les bases de données privées des agences (CRM, portefeuilles de biens).
 
-
+**Lacunes du marché & opportunités pour notre projet :**
+- **Accès grand public aux données complexes :** Peu d'outils conversationnels simples permettent au grand public (B2C) d'interroger facilement des bases de données complexes comme les DVF (Demandes de Valeurs Foncières) de manière naturelle.
+- **Croisement Analyse / Conversation :** Le marché est divisé entre les chatbots de relation client (Livie, Joe AI) et les outils cartographiques/analytiques lourds (Keyzia). Notre projet peut se démarquer en fusionnant les deux : un assistant naturel et fluide capable de fournir des insights data très précis (estimations basées sur des données open data).
+- **Transparence de l'information :** Un agent IA conçu de zéro avec un modèle open-source, mettant en valeur l'open data gouvernementale, répond à un besoin de transparence du marché immobilier.
 
 ---
 
