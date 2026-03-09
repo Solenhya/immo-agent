@@ -19,13 +19,14 @@
 
 *En quelques lignes, expliquez pourquoi vous réalisez ce benchmark et ce que vous cherchez à évaluer.*
 
-> 
+> Structurer notre exploration/veille sur les technologies a utiliser pour structurer notre choix de stack
 
 ---
 
 ## 3. Benchmark des agents / chatbots immobiliers existants
 
 *Analysez au moins 3 solutions existantes (sites web, applications, assistants) qui proposent des services similaires à votre projet.*
+Resp. Arnaud
 
 ### 3.1 Solution 1 : [Nom]
 
@@ -80,6 +81,7 @@
 ## 4. Benchmark des frameworks et outils d'orchestration IA
 
 *Comparez les différentes options pour orchestrer votre agent IA.*
+Resp.Fabien
 
 ### 4.1 LangChain
 
@@ -93,7 +95,7 @@
 | **Documentation en français** | ☐ Oui, abondante ☐ Quelques ressources ☐ Très peu ☐ Aucune |
 | **Notre avis / commentaires** | |
 
-### 4.2 Autre framework 1 : [Nom, ex: LlamaIndex]
+### 4.2 LangGraph
 
 | Critère | Évaluation |
 |:---|:---|
@@ -105,7 +107,19 @@
 | **Documentation en français** | ☐ Oui, abondante ☐ Quelques ressources ☐ Très peu ☐ Aucune |
 | **Notre avis / commentaires** | |
 
-### 4.3 Autre framework 2 : [Nom, ex: AutoGen, CrewAI, etc.]
+### 4.3 Orchestrateur maison
+
+| Critère | Évaluation |
+|:---|:---|
+| **Documentation** | ☐ Excellente ☐ Bonne ☐ Moyenne ☐ Insuffisante |
+| **Facilité de prise en main** | ☐ Très facile ☐ Facile ☐ Complexe ☐ Très complexe |
+| **Support des outils (tools)** | ☐ Natif ☐ Via extensions ☐ Limité ☐ Non supporté |
+| **Communauté / Écosystème** | ☐ Très active ☐ Active ☐ Peu active ☐ Inexistante |
+| **Intégration avec les LLM** | ☐ Nombreuses ☐ Quelques-unes ☐ Limitées ☐ Aucune |
+| **Documentation en français** | ☐ Oui, abondante ☐ Quelques ressources ☐ Très peu ☐ Aucune |
+| **Notre avis / commentaires** | |
+
+### 4.4 CrewAI
 
 | Critère | Évaluation |
 |:---|:---|
@@ -132,9 +146,10 @@
 
 ## 5. Benchmark des modèles de langage (LLM)
 
-*Comparez les modèles que vous pourriez utiliser.*
+*Comparez les modèles que vous pourriez utiliser.* 
+Resp.Fabien
 
-| Critère | Option 1 : [Nom] | Option 2 : [Nom] | Option 3 : [Nom] |
+| Critère | Mistral large | Qwen 8b | Gemini |
 |:---|:---|:---|:---|
 | **Fournisseur** | | | |
 | **Type** | ☐ Open source ☐ Propriétaire | ☐ Open source ☐ Propriétaire | ☐ Open source ☐ Propriétaire |
@@ -158,8 +173,9 @@
 ## 6. Benchmark des bases de données
 
 *Comparez les options pour stocker vos données.*
+Resp.Arnaud
 
-| Critère | PostgreSQL | Autre option 1 : [Nom] | Autre option 2 : [Nom] |
+| Critère | PostgreSQL | MongoDB | PostgreSQL (avec pgvector) |
 |:---|:---|:---|:---|
 | **Type** | Relationnelle | | |
 | **Support géospatial (PostGIS)** | ☐ Oui ☐ Non | ☐ Oui ☐ Non | ☐ Oui ☐ Non |
@@ -181,6 +197,7 @@
 ## 7. Benchmark des sources de données externes
 
 *Évaluez les différentes sources de données que vous pourriez utiliser.*
+Resp. Arnaud et Fabien
 
 ### 7.1 API DVF (Demandes de Valeurs Foncières)
 
@@ -237,8 +254,9 @@
 ## 8. Benchmark des interfaces utilisateur / frontend
 
 *Comparez les options pour créer l'interface de votre application.*
+Resp.Fabien
 
-| Critère | Streamlit | Gradio | Autre : [Nom] | Autre : [Nom] |
+| Critère | Streamlit | Gradio | FastAPI | Django|
 |:---|:---|:---|:---|:---|
 | **Rapidité de développement** | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne |
 | **Composants chat intégrés** | ☐ Oui ☐ Non | ☐ Oui ☐ Non | ☐ Oui ☐ Non | ☐ Oui ☐ Non |

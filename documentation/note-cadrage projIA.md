@@ -20,11 +20,11 @@
 
 ### 2.1 Objectif principal (en une phrase)
 
-> 
+> Creer un agent IA pour guider un utilisateur dans ses démarche immobiliere
 
 ### 2.2 Problématique / besoin utilisateur
 
-*Quel problème concret l'application va-t-elle résoudre ? Pour quel type d'utilisateur ?*
+*Quel problème concret l'application va-t-elle résoudre ? Centraliser des outils (prévision immobiliere etc) Dans un outils interactif et adaptatif. Pour quel type d'utilisateur ? Pour tout utilisateur qui a des questions immobilière
 
 
 
@@ -33,14 +33,14 @@
 
 *Cochez les fonctionnalités que vous prévoyez d'implémenter :*
 
-- [ ] Interface de chat / conversation
-- [ ] Recherche de biens immobiliers par critères
-- [ ] Estimation de prix à partir des données DVF
-- [ ] Informations sur une commune (écoles, transports, commerces)
-- [ ] Conseils personnalisés (investissement, achat, location)
-- [ ] Historique des conversations
-- [ ] Autre (précisez) : 
-
+- [x] Interface de chat / conversation
+- [x] Recherche de biens immobiliers par critères
+- [x] Estimation de prix à partir des données DVF
+- [?] Informations sur une commune (écoles, transports, commerces)
+- [?] Conseils personnalisés (investissement, achat, location)
+- [x] Historique des conversations
+- [?] Autre (précisez) : 
+Suivi utilisateur (summarization des conversations pour avoir un profil)
 ---
 
 ## 3. Architecture technique
@@ -112,14 +112,15 @@
 
 | Étudiant | Responsabilités principales |
 |:---|:---|
-| Étudiant 1 | |
-| Étudiant 2 | |
+| Arnaud | |
+| Fabien |"Scrum Master"|
+A décider "product owner" (responsable de l'intégrité du produit)
 
 ### 5.2 Planification prévisionnelle
 
 | Jour | Objectifs | Tâches détaillées | Responsable |
 |:---|:---|:---|:---|
-| Lundi | Initialisation | | |
+| Lundi | Initialisation | | Fabien|
 | Mardi | Développement | | |
 | Mercredi | **Jalon mi-parcours** | | |
 | Jeudi | Intégration | | |
@@ -127,7 +128,7 @@
 
 ### 5.3 Outils de gestion de projet utilisés
 
-- [ ] GitHub Projects
+- [x] GitHub Projects
 - [ ] Trello / Notion
 - [ ] Autre : 
 
@@ -138,7 +139,6 @@
 ### 6.1 Contraintes techniques
 
 *Limitations connues (API rate limits, taille des données, temps de réponse, etc.) :*
-
 
 
 
@@ -159,14 +159,17 @@
 
 *Ce que vous considérez comme le "minimum acceptable" pour vendredi :*
 
-- [ ] 
-- [ ] 
-- [ ] 
+- [ ] Chat fonctionnel
+- [ ] Agent dispose outil estimation
+- [ ] Agent utilise outil estimation
+- [ ] Interface utilisateur
 
 ### 7.2 Fonctionnalités "nice to have" (si temps)
 
-- [ ] 
-- [ ] 
+- [ ] Autres outils : MCP gouv, 
+- [ ] Enregistrement conversation
+- [ ] Creation profil utilisateur avec summarization
+- [ ] Recherche de bien immobilier
 - [ ] 
 
 ---
@@ -175,8 +178,8 @@
 
 | | Nom | Date | Signature |
 |:---|:---|:---|:---|
-| **Étudiant 1** | | | |
-| **Étudiant 2** | | | |
+| **Arnaud** | | | |
+| **Fabien** | | | |
 | **Formateur (optionnel)** | | | |
 
 ---
