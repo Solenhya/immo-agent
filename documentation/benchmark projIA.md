@@ -87,49 +87,49 @@ Resp.Fabien
 
 | Critère | Évaluation |
 |:---|:---|
-| **Documentation** | ☐ Excellente ☐ Bonne ☐ Moyenne ☐ Insuffisante |
-| **Facilité de prise en main** | ☐ Très facile ☐ Facile ☐ Complexe ☐ Très complexe |
-| **Support des outils (tools)** | ☐ Natif ☐ Via extensions ☐ Limité ☐ Non supporté |
-| **Communauté / Écosystème** | ☐ Très active ☐ Active ☐ Peu active ☐ Inexistante |
-| **Intégration avec les LLM** | ☐ Nombreuses ☐ Quelques-unes ☐ Limitées ☐ Aucune |
-| **Documentation en français** | ☐ Oui, abondante ☐ Quelques ressources ☐ Très peu ☐ Aucune |
-| **Notre avis / commentaires** | |
+| **Documentation** | ☐ Excellente x Bonne ☐ Moyenne ☐ Insuffisante |
+| **Facilité de prise en main** | x Très facile ☐ Facile ☐ Complexe ☐ Très complexe |
+| **Support des outils (tools)** | x Natif ☐ Via extensions ☐ Limité ☐ Non supporté |
+| **Communauté / Écosystème** | ☐ Très active ☐ Active x Peu active ☐ Inexistante |
+| **Intégration avec les LLM** | x Nombreuses ☐ Quelques-unes ☐ Limitées ☐ Aucune |
+| **Documentation en français** | ☐ Oui, abondante ☐ Quelques ressources ☐ Très peu x Aucune |
+| **Notre avis / commentaires** |Solution d'abstraction qui présente peu d'avantage par rapport a un orchestrateur maison depuis que les provider utilise des outils|
 
 ### 4.2 LangGraph
 
 | Critère | Évaluation |
 |:---|:---|
-| **Documentation** | ☐ Excellente ☐ Bonne ☐ Moyenne ☐ Insuffisante |
-| **Facilité de prise en main** | ☐ Très facile ☐ Facile ☐ Complexe ☐ Très complexe |
-| **Support des outils (tools)** | ☐ Natif ☐ Via extensions ☐ Limité ☐ Non supporté |
-| **Communauté / Écosystème** | ☐ Très active ☐ Active ☐ Peu active ☐ Inexistante |
-| **Intégration avec les LLM** | ☐ Nombreuses ☐ Quelques-unes ☐ Limitées ☐ Aucune |
-| **Documentation en français** | ☐ Oui, abondante ☐ Quelques ressources ☐ Très peu ☐ Aucune |
-| **Notre avis / commentaires** | |
+| **Documentation** | ☐ Excellente x Bonne ☐ Moyenne ☐ Insuffisante |
+| **Facilité de prise en main** | ☐ Très facile x Facile ☐ Complexe ☐ Très complexe |
+| **Support des outils (tools)** | x Natif ☐ Via extensions ☐ Limité ☐ Non supporté |
+| **Communauté / Écosystème** | x Très active ☐ Active ☐ Peu active ☐ Inexistante |
+| **Intégration avec les LLM** | x Nombreuses ☐ Quelques-unes ☐ Limitées ☐ Aucune |
+| **Documentation en français** | ☐ Oui, abondante ☐ Quelques ressources ☐ Très peu x Aucune |
+| **Notre avis / commentaires** | Un outil qui se base sur Langchain et va plus loin|
 
 ### 4.3 Orchestrateur maison
 
 | Critère | Évaluation |
 |:---|:---|
-| **Documentation** | ☐ Excellente ☐ Bonne ☐ Moyenne ☐ Insuffisante |
-| **Facilité de prise en main** | ☐ Très facile ☐ Facile ☐ Complexe ☐ Très complexe |
-| **Support des outils (tools)** | ☐ Natif ☐ Via extensions ☐ Limité ☐ Non supporté |
-| **Communauté / Écosystème** | ☐ Très active ☐ Active ☐ Peu active ☐ Inexistante |
-| **Intégration avec les LLM** | ☐ Nombreuses ☐ Quelques-unes ☐ Limitées ☐ Aucune |
-| **Documentation en français** | ☐ Oui, abondante ☐ Quelques ressources ☐ Très peu ☐ Aucune |
-| **Notre avis / commentaires** | |
+| **Documentation** | ☐ Excellente ☐ Bonne x Moyenne ☐ Insuffisante |
+| **Facilité de prise en main** | ☐ Très facile x Facile ☐ Complexe ☐ Très complexe |
+| **Support des outils (tools)** | ☐ Natif x Via extensions ☐ Limité ☐ Non supporté |
+| **Communauté / Écosystème** | ☐ Très active ☐ Active x Peu active ☐ Inexistante |
+| **Intégration avec les LLM** | x Nombreuses ☐ Quelques-unes ☐ Limitées ☐ Aucune |
+| **Documentation en français** | ☐ Oui, abondante ☐ Quelques ressources ☐ Très peu x Aucune |
+| **Notre avis / commentaires** | Permet de comprendre et maitriser completement les problématiques d'orchestration|
 
 ### 4.4 CrewAI
 
 | Critère | Évaluation |
 |:---|:---|
-| **Documentation** | ☐ Excellente ☐ Bonne ☐ Moyenne ☐ Insuffisante |
-| **Facilité de prise en main** | ☐ Très facile ☐ Facile ☐ Complexe ☐ Très complexe |
-| **Support des outils (tools)** | ☐ Natif ☐ Via extensions ☐ Limité ☐ Non supporté |
-| **Communauté / Écosystème** | ☐ Très active ☐ Active ☐ Peu active ☐ Inexistante |
-| **Intégration avec les LLM** | ☐ Nombreuses ☐ Quelques-unes ☐ Limitées ☐ Aucune |
-| **Documentation en français** | ☐ Oui, abondante ☐ Quelques ressources ☐ Très peu ☐ Aucune |
-| **Notre avis / commentaires** | |
+| **Documentation** | ☐ Excellente x Bonne ☐ Moyenne ☐ Insuffisante |
+| **Facilité de prise en main** | ☐ Très facile ☐ Facile x Complexe ☐ Très complexe |
+| **Support des outils (tools)** | x Natif ☐ Via extensions ☐ Limité ☐ Non supporté |
+| **Communauté / Écosystème** | ☐ Très active ☐ Active x Peu active ☐ Inexistante |
+| **Intégration avec les LLM** | x Nombreuses ☐ Quelques-unes ☐ Limitées ☐ Aucune |
+| **Documentation en français** | ☐ Oui, abondante ☐ Quelques ressources ☐ Très peu x Aucune |
+| **Notre avis / commentaires** | Un peu avancé pour notre usage: Utilisation de "crew" multi agent |
 
 ### 4.4 Synthèse et choix motivé
 
@@ -152,13 +152,13 @@ Resp.Fabien
 | Critère | Mistral large | Qwen 8b | Gemini |
 |:---|:---|:---|:---|
 | **Fournisseur** | | | |
-| **Type** | ☐ Open source ☐ Propriétaire | ☐ Open source ☐ Propriétaire | ☐ Open source ☐ Propriétaire |
-| **Taille / Version** | | | |
-| **Coût** | ☐ Gratuit ☐ Payant ☐ Freemium | ☐ Gratuit ☐ Payant ☐ Freemium | ☐ Gratuit ☐ Payant ☐ Freemium |
-| **Performance / Qualité** | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne |
-| **Vitesse d'inférence** | ☐ Rapide ☐ Moyenne ☐ Lente | ☐ Rapide ☐ Moyenne ☐ Lente | ☐ Rapide ☐ Moyenne ☐ Lente |
-| **Support du français** | ☐ Excellent ☐ Bon ☐ Moyen ☐ Mauvais | ☐ Excellent ☐ Bon ☐ Moyen ☐ Mauvais | ☐ Excellent ☐ Bon ☐ Moyen ☐ Mauvais |
-| **Facilité d'intégration** | ☐ Très facile ☐ Facile ☐ Complexe | ☐ Très facile ☐ Facile ☐ Complexe | ☐ Très facile ☐ Facile ☐ Complexe |
+| **Type** | ☐ Open source x Propriétaire | x Open source ☐ Propriétaire | ☐ Open source x Propriétaire |
+| **Taille / Version** | large | 8b |last|
+| **Coût** | x Gratuit ☐ Payant ☐ Freemium | x Gratuit ☐ Payant ☐ Freemium | ☐ Gratuit x Payant ☐ Freemium |
+| **Performance / Qualité** | x Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne x Moyenne | x Excellente ☐ Bonne ☐ Moyenne |
+| **Vitesse d'inférence** | ☐ Rapide x Moyenne ☐ Lente | ☐ Rapide x Moyenne ☐ Lente | x Rapide ☐ Moyenne ☐ Lente |
+| **Support du français** | x Excellent ☐ Bon ☐ Moyen ☐ Mauvais | ☐ Excellent ☐ Bon x Moyen ☐ Mauvais | ☐ Excellent x Bon ☐ Moyen ☐ Mauvais |
+| **Facilité d'intégration** | x Très facile ☐ Facile ☐ Complexe | ☐ Très facile ☐ Facile x Complexe | ☐ Très facile x Facile ☐ Complexe |
 | **Limites (rate limits, etc.)** | | | |
 
 **Choix du modèle retenu :** 
@@ -258,12 +258,12 @@ Resp.Fabien
 
 | Critère | Streamlit | Gradio | FastAPI | Django|
 |:---|:---|:---|:---|:---|
-| **Rapidité de développement** | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne |
-| **Composants chat intégrés** | ☐ Oui ☐ Non | ☐ Oui ☐ Non | ☐ Oui ☐ Non | ☐ Oui ☐ Non |
-| **Personnalisation** | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne |
-| **Documentation** | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne |
-| **Communauté** | ☐ Très active ☐ Active ☐ Peu active | ☐ Très active ☐ Active ☐ Peu active | ☐ Très active ☐ Active ☐ Peu active | ☐ Très active ☐ Active ☐ Peu active |
-| **Facilité de déploiement** | ☐ Très facile ☐ Facile ☐ Complexe | ☐ Très facile ☐ Facile ☐ Complexe | ☐ Très facile ☐ Facile ☐ Complexe | ☐ Très facile ☐ Facile ☐ Complexe |
+| **Rapidité de développement** | x Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente x Bonne ☐ Moyenne | ☐ Excellente x Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne x Moyenne |
+| **Composants chat intégrés** | x Oui ☐ Non | x Oui ☐ Non | ☐ Oui x Non | ☐ Oui x Non |
+| **Personnalisation** | ☐ Excellente ☐ Bonne x Moyenne | ☐ Excellente ☐ Bonne x Moyenne | x Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente x Bonne ☐ Moyenne |
+| **Documentation** | ☐ Excellente x Bonne ☐ Moyenne | ☐ Excellente x Bonne ☐ Moyenne | x Excellente ☐ Bonne ☐ Moyenne | x Excellente ☐ Bonne ☐ Moyenne |
+| **Communauté** | ☐ Très active x Active ☐ Peu active | ☐ Très active x Active ☐ Peu active | x Très active ☐ Active ☐ Peu active | x Très active ☐ Active ☐ Peu active |
+| **Facilité de déploiement** | x Très facile ☐ Facile ☐ Complexe | x Très facile ☐ Facile ☐ Complexe | ☐ Très facile x Facile ☐ Complexe | ☐ Très facile ☐ Facile x Complexe |
 
 **Choix de l'interface retenue :** 
 
