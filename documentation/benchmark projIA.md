@@ -83,7 +83,11 @@ Resp. Arnaud
 - **Croisement Analyse / Conversation :** Le marché est divisé entre les chatbots de relation client (Livie, Joe AI) et les outils cartographiques/analytiques lourds (Keyzia). Notre projet peut se démarquer en fusionnant les deux : un assistant naturel et fluide capable de fournir des insights data très précis (estimations basées sur des données open data).
 - **Transparence de l'information :** Un agent IA conçu de zéro avec un modèle open-source, mettant en valeur l'open data gouvernementale, répond à un besoin de transparence du marché immobilier.
 
+
 ---
+
+### Orientation dans un premier temps:
+Donner a un utilisateur un etat du marché nourrit par des informations diverses (prix immobillier, education etc) et fournit par un agent
 
 ## 4. Benchmark des frameworks et outils d'orchestration IA
 
@@ -140,7 +144,7 @@ Resp.Fabien
 
 ### 4.4 Synthèse et choix motivé
 
-*Quel framework avez-vous choisi et pourquoi ?*
+*Quel framework avez-vous choisi et pourquoi ? Langchain (et peut etre LangGraph)
 
 **Framework retenu :** 
 
@@ -168,7 +172,7 @@ Resp.Fabien
 | **Facilité d'intégration** | x Très facile ☐ Facile ☐ Complexe | ☐ Très facile ☐ Facile x Complexe | ☐ Très facile x Facile ☐ Complexe |
 | **Limites (rate limits, etc.)** | | | |
 
-**Choix du modèle retenu :** 
+**Choix du modèle retenu :** Mistral car puissant et gratuit 
 
 **Justification :**
 
@@ -192,7 +196,7 @@ Resp.Arnaud
 | **Communauté** | ☐ Très active ☐ Active ☐ Peu active | ☐ Très active ☐ Active ☐ Peu active | ☐ Très active ☐ Active ☐ Peu active |
 | **Intégration avec Python** | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne |
 
-**Choix de la base de données retenue :** 
+**Choix de la base de données retenue :** PostgreSQL avec extension postigis
 
 **Justification :**
 
@@ -272,8 +276,7 @@ Resp.Fabien
 | **Communauté** | ☐ Très active x Active ☐ Peu active | ☐ Très active x Active ☐ Peu active | x Très active ☐ Active ☐ Peu active | x Très active ☐ Active ☐ Peu active |
 | **Facilité de déploiement** | x Très facile ☐ Facile ☐ Complexe | x Très facile ☐ Facile ☐ Complexe | ☐ Très facile x Facile ☐ Complexe | ☐ Très facile ☐ Facile x Complexe |
 
-**Choix de l'interface retenue :** 
-
+**Choix de l'interface retenue :**  FastAPI (maitrise) bon équilibre controle et simplicité 
 **Justification :**
 
 
