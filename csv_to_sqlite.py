@@ -16,18 +16,19 @@ def create_database():
     print(f"Lecture du fichier: {CSV_FILE}")
     
     # On précise que le séparateur est | (typiques des DVF) et on garde que l'essentiel
-    cols_utiles = ['Date mutation', 'Valeur fonciere', 'Code postal', 'Commune', 
-                   'Type local', 'Surface reelle bati', 'Nombre pieces principales']
+    cols_utiles = ['Date mutation', 'Valeur fonciere', 'No voie', 'Type de voie', 'Voie', 
+                   'Code postal', 'Commune', 'Type local', 'Surface reelle bati', 'Nombre pieces principales']
                    
     chunksize = 50000
     for chunk in pd.read_csv(CSV_FILE, sep=',', usecols=cols_utiles, low_memory=False, chunksize=chunksize):
         
-        # 3. Nettoyage du prix (enlever la virgule pour que Python comprenne que c'est un chiffre)
+        # 3. Nettoyage des chiffres (enlever la virgule pour que Python comprenne)
         chunk['Valeur fonciere'] = chunk['Valeur fonciere'].astype(str).str.replace(',', '.').astype(float)
+        chunk['Surface reelle bati'] = chunk['Surface reelle bati'].astype(str).str.replace(',', '.').astype(float)
         
         # 4. Sauvegarde dans la base SQLite (dans une table appelée "transactions")
         chunk.to_sql('transactions', conn, if_exists='append', index=False)
-        print(f"  + {chunksize} lignes ajoutées...")
+        print(f"  + {chunk.shape[0]} lignes ajoutées...")
 
     # 5. Création d'index pour accélérer les recherches de l'agent
     print("Création des index (sur Commune et Code Postal) pour une recherche ultra-rapide...")

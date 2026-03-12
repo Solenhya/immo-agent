@@ -1,128 +1,125 @@
 import os
 import requests
-import asyncio
 import sqlite3
+import re
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
-from langgraph.prebuilt import create_react_agent
 from langchain_core.tools import tool
-from dataclasses import dataclass
 
-from mcp import ClientSession
-from mcp.client.streamable_http import streamable_http_client
-from langchain_mcp_adapters.tools import load_mcp_tools
-from langsmith import traceable 
-
-# Charge les variables d'environnement (.env)
 load_dotenv()
 
-# Configuration du modèle
 model = ChatGroq(
     model="llama-3.1-8b-instant",
     api_key=os.getenv("GROQ_API_KEY"),
-    temperature=0,
-    max_tokens=1500
+    temperature=0
 )
 
-
-@dataclass
-class Bien:
-    type: str
-    address: str
-    surface: int
-
-@tool
-def geocode(adresse: str):
-    """
-    Géocode une adresse française pour obtenir ses coordonnées (latitude, longitude).
-    :param adresse: L'adresse complète ou la ville.
-    :return: les coordonnées [longitude, latitude]
-    """
-    URL = "https://data.geopf.fr/geocodage/search/"
-    res = requests.get(URL, params={'q': adresse, 'limit': 1, 'autocomplete': 1})
-    features = res.json().get('features')
-    if features:
-        return features[0].get('geometry').get('coordinates')
-    return "Adresse non trouvée."
+# PROMPT CENTRAL PARTAGÉ (API & CLI)
+PROMPT_CENTRAL = (
+    "Tu es l'expert immobilier de Solenhya Immo.\n"
+    "RÈGLES DE FONCTIONNEMENT :\n"
+    "1. APPEL D'OUTILS (SILENCE TECHNIQUE) : Si tu as besoin de données, N'ÉCRIS RIEN D'AUTRE que l'appel d'outil. Silence total.\n"
+    "2. DISTINCTION : Si on demande le prix de 'l'immobilier' sans préciser, appelle `outil_dvf_historique` deux fois : une pour 'Maison' et une pour 'Appartement'.\n"
+    "3. EXCLUSION : Si on demande les 'ventes', ignore le prix moyen. Si on demande le 'prix moyen', ignore la liste des ventes.\n"
+    "4. POLITESSE MIROIR : Ne dis 'Bonjour !' que si l'utilisateur l'a dit dans son message actuel.\n"
+    "5. SYNTHÈSE : Rédige une phrase naturelle reprenant les données exactes."
+)
 
 @tool
-def infos_ville(ville: str) -> str:
-    """
-    Récupère des informations administratives et démographiques sur une ville (population, code postal, etc.).
-    :param ville: Le nom de la ville.
-    :return: Un résumé des informations de la ville.
-    """
-    print(f"\n🔎 [OUTIL LOCAL] Récupération des infos pour {ville}...")
+def outil_dvf_historique(ville: str, type_bien: str = "Maison") -> str:
+    """Consulte l'historique des ventes DVF pour une ville et un type de bien."""
     try:
-        url = "https://geo.api.gouv.fr/communes"
-        params = {
-            "nom": ville,
-            "fields": "nom,code,codesPostaux,population,codeDepartement",
-            "format": "json",
-            "limit": 1
-        }
-        res = requests.get(url, params=params)
-        data = res.json()
-        if data:
-            info = data[0]
-            nom = info.get('nom')
-            pop = info.get('population', 'inconnue')
-            cp = ", ".join(info.get('codesPostaux', []))
-            dept = info.get('codeDepartement')
-            res_str = f"Ville: {nom}, Population: {pop} habitants, Codes Postaux: {cp}, Département: {dept}."
-            return res_str
-        return f"Aucune information trouvée pour la ville {ville}."
-    except Exception as e:
-        return f"Erreur lors de la récupération des infos de la ville : {str(e)}"
-
-@tool
-def historique_ventes(ville: str, type_bien: str, pieces: int = None) -> str:
-    """
-    ESSENTIEL POUR L'ESTIMATION : Interroge la base locale sécurisée des transactions immobilières (DVF 2025).
-    :param ville: Le nom exact de la commune (ex: TOULOUSE, PARIS, SAINT-CYR-SUR-LOIRE)
-    :param type_bien: Le type de bien : 'Maison' ou 'Appartement'
-    :param pieces: Le nombre de pièces principales (optionnel)
-    :return: Le résumé des transactions récentes, ou un message d'erreur si rien n'est trouvé.
-    """
-    print(f"\n� [OUTIL LOCAL] Recherche dans la base DVF 2025 pour {type_bien} à {ville.upper()}...")
-    try:
+        # Standardisation du nom de la ville
+        v_search = ville.upper().replace('-', ' ').strip()
+        v_alt = v_search.replace(' ', '-')
+            
         conn = sqlite3.connect('data/immo_ventes.db')
         cursor = conn.cursor()
-        
-        # Requête de base
-        requete = """
-            SELECT "Valeur fonciere", "Surface reelle bati", "Date mutation"
+        query = """
+            SELECT "Valeur fonciere", "Surface reelle bati", "Date mutation", "Voie"
             FROM transactions 
-            WHERE Commune LIKE ? 
-              AND "Type local" = ? 
-              AND "Valeur fonciere" IS NOT NULL
-              AND "Surface reelle bati" > 10
+            WHERE (Commune = ? OR Commune = ? OR Commune LIKE ?)
+            AND "Type local" = ? 
+            AND "Valeur fonciere" > 1000 
+            ORDER BY substr("Date mutation", 7, 4) DESC, substr("Date mutation", 4, 2) DESC, substr("Date mutation", 1, 2) DESC
+            LIMIT 20
         """
-        # Nettoyage du nom de la ville pour correspondre au format DVF (souvent avec des tirets)
-        ville_clean = ville.upper().replace(' ', '-')
-        params = [f"%{ville_clean}%", type_bien.capitalize()]
-        
-        # Ajout du filtre sur les pièces s'il est fourni
-        if pieces is not None:
-            requete += ' AND "Nombre pieces principales" = ?'
-            params.append(pieces)
-            
-        cursor.execute(requete, params)
-        resultats = cursor.fetchall()
+        cursor.execute(query, [v_search, v_alt, f"{v_search}%", type_bien.capitalize()])
+        rows = cursor.fetchall()
         conn.close()
+        if not rows: return f"Aucun résultat trouvé pour {type_bien} à {ville}."
+        res, t, c = "", 0, 0
+        for r in rows: # On parcourt les résultats pour trouver les 5 meilleurs
+            val, surf, date, voie = r
+            if surf and surf > 0:
+                p = val/surf
+                if 800 < p < 15000:
+                    if c < 5:
+                        res += f"- {date}: {int(val)}€ ({int(surf)}m²) {voie}\n"
+                    t += p; c += 1
+        moy = round(t/c) if c > 0 else 0
+        return f"Moyenne {type_bien}: {moy}€/m²\nVentes:\n{res if res else 'Pas de ventes cohérentes.'}"
+    except Exception as e: return f"Erreur: {str(e)}"
+
+def _get_average_price(ville: str, type_bien: str) -> int:
+    try:
+        v_search = ville.upper().replace('-', ' ').strip()
+        v_alt = v_search.replace(' ', '-')
         
-        if not resultats:
-            return f"Aucune transaction récente trouvée à {ville} pour un(e) {type_bien}."
-            
-        # Calculs statistiques simples
-        nb_ventes = len(resultats)
-        prix_total = sum(row[0] for row in resultats)
-        surface_totale = sum(row[1] for row in resultats)
-        prix_m2_moyen = prix_total / surface_totale if surface_totale > 0 else 0
+        conn = sqlite3.connect('data/immo_ventes.db')
+        cursor = conn.cursor()
+        query = """
+            SELECT "Valeur fonciere", "Surface reelle bati"
+            FROM transactions 
+            WHERE (Commune = ? OR Commune = ? OR Commune LIKE ?)
+            AND "Type local" = ? 
+            AND "Valeur fonciere" > 1000
+            ORDER BY substr("Date mutation", 7, 4) DESC, substr("Date mutation", 4, 2) DESC, substr("Date mutation", 1, 2) DESC
+            LIMIT 50
+        """
+        cursor.execute(query, [v_search, v_alt, f"{v_search}%", type_bien.capitalize()])
+        rows = cursor.fetchall()
+        conn.close()
+        t, c = 0, 0
+        for r in rows:
+            val, surf = r
+            if surf and surf > 0:
+                p = val/surf
+                if 800 < p < 20000: # Plage un peu plus large pour les grandes villes
+                    t += p; c += 1
+        return round(t/c) if c > 0 else 0
+    except:
+        return 0
+
+@tool
+def outil_dvf_estimation(ville: str, surface: str, type_bien: str = "Maison", etat: str = "moyen") -> str:
+    """Estime un prix. État : neuf, bon, moyen, a renover."""
+    try:
+        # Nettoyage de la surface (ex: "80 m2" -> 80)
+        nums = re.findall(r"[-+]?\d*\.\d+|\d+", str(surface).replace(',', '.'))
+        surface_val = float(nums[0]) if nums else 0
+    except:
+        surface_val = 0
         
-        return (f"J'ai analysé {nb_ventes} ventes de {type_bien} à {ville} en 2025. "
-                f"Le prix moyen est de {round(prix_m2_moyen)} € le mètre carré. "
-                "Utilise ces vrais chiffres pour formuler ton estimation à l'utilisateur.")
-                
-    except Exception as e:
-        return f"Erreur lors de l'accès à la base de données : {str(e)}"
+    if surface_val <= 0:
+        return "Erreur: Veuillez préciser une surface valide (ex: 80)."
+
+    p_m2 = _get_average_price(ville, type_bien)
+    if not p_m2: return f"Données insuffisantes pour {type_bien} à {ville}."
+    
+    coeff = {"neuf": 1.2, "bon": 1.1, "moyen": 1.0, "a renover": 0.8}
+    adj_coeff = coeff.get(etat.lower(), 1.0)
+    val = surface_val * p_m2 * adj_coeff
+    
+    return f"**ESTIMATION : {int(val)} €**\n(Base: {p_m2}€/m² pour un bien en état {etat})"
+
+
+@tool
+def outil_infos_ville(ville: str) -> str:
+    """Population."""
+    try:
+        url = "https://geo.api.gouv.fr/communes"
+        res = requests.get(url, params={"nom": ville, "fields": "population", "limit": 1})
+        d = res.json()
+        return f"{ville}: {d[0]['population']} hab." if d else "Inconnu."
+    except: return "Erreur."
