@@ -52,6 +52,9 @@ async def async_run_agent(user_message,thread_id):
     result = await agent.ainvoke(messages, config=config)
     return result
 
+async def async_run_agent_response(user_message, thread_id):
+    result = await async_run_agent(user_message, thread_id)
+    return result["messages"][-1].content
 
 def get_state(thread_id):
     config = {"configurable": {"thread_id": thread_id}}
