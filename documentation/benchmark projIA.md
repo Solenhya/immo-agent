@@ -184,17 +184,18 @@ Resp.Arnaud
 
 | Critère | PostgreSQL | MongoDB | PostgreSQL (avec pgvector) |
 |:---|:---|:---|:---|
-| **Type** | Relationnelle | | |
-| **Support géospatial (PostGIS)** | ☐ Oui ☐ Non | ☐ Oui ☐ Non | ☐ Oui ☐ Non |
-| **Performance** | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne |
-| **Facilité d'installation** | ☐ Très facile ☐ Facile ☐ Complexe | ☐ Très facile ☐ Facile ☐ Complexe | ☐ Très facile ☐ Facile ☐ Complexe |
-| **Documentation** | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne |
-| **Communauté** | ☐ Très active ☐ Active ☐ Peu active | ☐ Très active ☐ Active ☐ Peu active | ☐ Très active ☐ Active ☐ Peu active |
-| **Intégration avec Python** | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☐ Bonne ☐ Moyenne |
+| **Type** | Relationnelle | Document (NoSQL) | Relationnelle + Vectorielle |
+| **Support géospatial (PostGIS)** | ☑ Oui ☐ Non | ☑ Oui ☐ Non | ☑ Oui ☐ Non |
+| **Performance** | ☑ Excellente ☐ Bonne ☐ Moyenne | ☑ Excellente ☐ Bonne ☐ Moyenne | ☑ Excellente ☑ Bonne ☐ Moyenne |
+| **Facilité d'installation** | ☐ Très facile ☑ Facile ☐ Complexe | ☑ Très facile ☐ Facile ☐ Complexe | ☐ Très facile ☑ Facile ☐ Complexe |
+| **Documentation** | ☑ Excellente ☐ Bonne ☐ Moyenne | ☑ Excellente ☐ Bonne ☐ Moyenne | ☐ Excellente ☑ Bonne ☐ Moyenne |
+| **Communauté** | ☑ Très active ☐ Active ☐ Peu active | ☑ Très active ☐ Active ☐ Peu active | ☑ Très active ☐ Active ☐ Peu active |
+| **Intégration avec Python** | ☑ Excellente ☐ Bonne ☐ Moyenne | ☑ Excellente ☐ Bonne ☐ Moyenne | ☑ Excellente ☐ Bonne ☐ Moyenne |
 
-**Choix de la base de données retenue :** 
+**Choix de la base de données retenue :** PostgreSQL (avec PostGIS)
 
-**Justification :**
+**Justification :** 
+PostgreSQL est retenu pour sa robustesse et sa gestion native des données géospatiales via **PostGIS** (indispensable pour les requêtes de proximité sur les données DVF). Plutôt qu'un RAG, nous utiliserons un **MCP server** dédié pour permettre à l'agent IA d'interroger directement la base SQL de manière structurée. C'est l'approche la plus précise pour manipuler des données transactionnelles et géographiques complexes.
 
 
 
