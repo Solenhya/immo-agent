@@ -1,0 +1,5 @@
+langchain-groq==0.3.8
+langchain-core==0.3.83
+groq==0.37.1
+python-dotenv==1.2.1
+requests==2.32.5
