@@ -36,6 +36,41 @@ function escapeHTML(str) {
     );
 }
 
+// Gestion de l'authentification
+async function handleLogin() {
+    const emailInput = document.getElementById('emailInput');
+    const email = emailInput.value.trim();
+    const loginBtn = document.getElementById('loginBtn');
+    
+    if (!email) return alert("Veuillez entrer une adresse e-mail.");
+    
+    loginBtn.disabled = true;
+    loginBtn.innerText = "Connexion...";
+
+    try {
+        const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+        });
+        
+        if (response.ok) {
+            document.getElementById('authOverlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('authOverlay').style.display = 'none';
+            }, 500);
+            addMessage("Bienvenue ! Je suis prêt à répondre à vos questions sur l'immobilier.", false);
+        } else {
+            alert("Erreur lors de la connexion. Veuillez réessayer.");
+        }
+    } catch (err) {
+        alert("Impossible de contacter le serveur d'authentification.");
+    } finally {
+        loginBtn.disabled = false;
+        loginBtn.innerText = "Ouvrir la session";
+    }
+}
+
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const text = input.value.trim();

@@ -13,6 +13,21 @@
 </head>
 <body>
     <div class="app-container">
+        <!-- Overlay d'Authentification -->
+        <div id="authOverlay" class="auth-overlay">
+            <div class="auth-box">
+                <div class="auth-header">
+                    <span class="auth-icon">🔑</span>
+                    <h2>Connexion</h2>
+                    <p>Entrez votre email pour accéder à l'agent expert</p>
+                </div>
+                <div class="auth-footer">
+                    <input type="email" id="emailInput" placeholder="votre@email.com" required>
+                    <button onclick="handleLogin()" id="loginBtn">Ouvrir la session</button>
+                </div>
+            </div>
+        </div>
+
         <header class="chat-header">
             <div class="logo">
                 <span class="icon">✨</span>

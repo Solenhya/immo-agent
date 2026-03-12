@@ -3,14 +3,14 @@ import requests
 import sqlite3
 import re
 from dotenv import load_dotenv
-from langchain_groq import ChatGroq
+from langchain_mistralai import ChatMistralAI
 from langchain_core.tools import tool
 
 load_dotenv()
 
-model = ChatGroq(
-    model="llama-3.1-8b-instant",
-    api_key=os.getenv("GROQ_API_KEY"),
+model = ChatMistralAI(
+    model="mistral-large-latest",
+    api_key=os.getenv("MISTRAL_API_KEY"),
     temperature=0
 )
 
