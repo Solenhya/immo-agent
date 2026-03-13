@@ -15,5 +15,6 @@ dependencies = [
 "python-dotenv",
 "langchain",
 "langchain-mistralai",
-"psycopg[binary]"
+"psycopg[binary]",
+"pandas"
 ]

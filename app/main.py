@@ -49,7 +49,10 @@ app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 @app.get("/", response_class=HTMLResponse)
 def read_root(request: Request):
-    return RedirectResponse(url=f"/conversation")
+    user_id = request.cookies.get("user_id")
+    if not user_id:
+        return RedirectResponse(url="/connexion")
+    return RedirectResponse(url=f"/user/conversations")
 
 
 if __name__ == "__main__":

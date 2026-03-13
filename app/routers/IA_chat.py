@@ -61,4 +61,20 @@ async def get_my_conversations(request: Request):
         return JSONResponse({"error": "Utilisateur non authentifié"}, status_code=401)
     
     conversations = user_db_simple.get_user_conversations(user_id)
-    return JSONResponse({"conversations": conversations})
+    conversation_ids = [conversation["id"] for conversation in conversations]
+    return JSONResponse({"conversations": conversation_ids})
+
+@router.get("/user/conversations")
+async def user_conversations_page(request: Request):
+    user_id = request.cookies.get("user_id")
+    if not user_id:
+        return RedirectResponse(url="/connexion", status_code=303)
+    
+    conversations = user_db_simple.get_user_conversations(user_id)
+    return templates.TemplateResponse(
+        "user_conversations.html",
+        {
+            "request": request,
+            "conversations": conversations
+        }
+    )

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solenhya Immo - Conversations</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏠</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style_conversations.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="page-header">
+            <div class="logo">
+                <span class="icon">✨</span>
+                <h1>Mes Conversations</h1>
+            </div>
+            <p class="subtitle">Retrouvez vos échanges avec Solenhya Immo AI</p>
+        </header>
+
+        <main class="content-area">
+            <section class="toolbar">
+                <button id="newConversationBtn" class="new-conversation-btn" type="button">
+                    + Nouvelle conversation
+                </button>
+            </section>
+
+            <section class="conversation-list-wrapper" aria-label="Liste des conversations">
+                <p class="list-title">Conversations récentes</p>
+                <div id="conversationList" class="conversation-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/conversations.js"></script>
+</body>
+</html>
