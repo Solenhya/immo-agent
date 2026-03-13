@@ -10,7 +10,7 @@ marked.setOptions({
 });
 
 function getConversationIdFromUrl() {
-    const match = window.location.pathname.match(/\/conversations\/([^/]+)/);
+    const match = window.location.pathname.match(/\/conversation\/([^/]+)/);
     return match ? decodeURIComponent(match[1]) : null;
 }
 
@@ -112,10 +112,19 @@ form.addEventListener('submit', async (e) => {
     typingIndicator.classList.remove('hidden');
 
     try {
+        const conversationId = getConversationIdFromTemplate() || getConversationIdFromUrl();
+        const payload = { message: text };
+        if (conversationId) {
+            payload.conversation_id = conversationId;
+        }else{
+            console.log("Erreur conversationId vide")
+            console.log(conversationId)
+        }
+
         const response = await fetch('/api/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: text })
+            body: JSON.stringify(payload)
         });
         
         const data = await response.json();
