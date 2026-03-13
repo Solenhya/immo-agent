@@ -1,15 +1,11 @@
 from langchain.agents import create_agent
 from langchain_mistralai import ChatMistralAI
-from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
-from langsmith import traceable
-from langchain_core.messages import ToolMessage
-from langgraph.checkpoint.memory import InMemorySaver  
 from pydantic import BaseModel, Field
-import json
-import asyncio
 from langchain.tools import tool
 load_dotenv()
+
+
 
 class BienImmobilier(BaseModel):
     """Input for real estate queries."""
@@ -33,27 +29,86 @@ def estimation_prix(bien: BienImmobilier):
         prix *= 1.2
 
     return prix
-    return f"Estimation du prix pour un {bien.type} de {bien.surface}m² avec {bien.rooms} pièces à {bien.location} : {prix}€ "
 
 
-llm = ChatMistralAI(model="mistral-large-latest")
+def format_messages(lc_messages):
+    role_map = {
+        "human": "user",
+        "ai": "assistant",
+        "system": "system"
+    }
+
+    return [
+        {
+            "role": role_map.get(m.type, m.type),
+            "content": m.content
+        }
+        for m in lc_messages
+    ]
 
 
 system_prompt = """Tu es un assistant d'estimation de prix pour les biens immobiliers. Utilise les outils a ta disposition et n'invente aucune chiffre"""
 
-# Ajout du tool estimation_prix
+llm = ChatMistralAI(model="mistral-large-latest")
+
+
 tools = [estimation_prix]
-agent = create_agent(model=llm, tools=tools, system_prompt=system_prompt, checkpointer=InMemorySaver())
-#agent_executor = AgentExecutor(agent=agent, tools=tools)
-#@traceable
-async def async_run_agent(user_message,thread_id):
+
+
+class AgentSingleton:
+    _instance = None
+
+    @classmethod
+    def initialize(cls, checkpointer):
+        """À appeler une seule fois au démarrage de l'application (lifespan)."""
+        if cls._instance is None:
+            cls._instance = create_agent(
+                model=llm,
+                tools=tools,
+                system_prompt=system_prompt,
+                checkpointer=checkpointer
+            )
+        return cls._instance
+
+    @classmethod
+    def get_instance(cls):
+        if cls._instance is None:
+            raise RuntimeError("AgentSingleton non initialisé. Appelez initialize() depuis le lifespan.")
+        return cls._instance
+
+    @classmethod
+    def reset(cls):
+        """Réinitialise le singleton (utile pour les tests)."""
+        cls._instance = None
+
+
+async def async_run_agent(user_message, thread_id):
+    agent = AgentSingleton.get_instance()
     config = {"configurable": {"thread_id": thread_id}}
-    messages = {"messages":[{"role":"user", "content": user_message}]}
+    messages = {"messages": [{"role": "user", "content": user_message}]}
     result = await agent.ainvoke(messages, config=config)
     return result
 
+async def async_run_agent_response(user_message, thread_id):
+    result = await async_run_agent(user_message, thread_id)
+    return result["messages"][-1].content
 
-def get_state(thread_id):
+async def get_state(thread_id):
+    agent = AgentSingleton.get_instance()
     config = {"configurable": {"thread_id": thread_id}}
-    state = agent.get_state(config=config)
+    state = await agent.aget_state(config=config)
     return state
+
+async def get_conversation(thread_id):
+    state = await get_state(thread_id)
+    if state and "messages" in state.values:
+        print(state)
+        messages = state.values["messages"]
+        messages = format_messages(messages)
+        return messages
+    else:
+        return []
+    
+async def delete_thread(thread_id):
+    agent = AgentSingleton.get_instance()
+    await agent.checkpointer.adelete_thread(thread_id=thread_id)
