@@ -1,4 +1,4 @@
-import db_session
+from . import db_session
 import os
 
 # 1. Créer le dossier data s'il n'existe pas

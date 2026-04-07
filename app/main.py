@@ -9,9 +9,9 @@ app = FastAPI()
 
 app.include_router(IA_chat.router)
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="frontend"), name="static")
+templates = Jinja2Templates(directory="frontend")
 
 @app.get("/", response_class=HTMLResponse)
 def read_root(request: Request):
-    return templates.TemplateResponse("chat.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})

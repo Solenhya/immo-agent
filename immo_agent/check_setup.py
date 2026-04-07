@@ -53,7 +53,7 @@ except:
 
 # Test 4: Outils DVF
 try:
-    from runIA import outil_dvf_historique, outil_dvf_estimation, outil_infos_ville
+    from .runIA import outil_dvf_historique, outil_dvf_estimation, outil_infos_ville
     print("✅ Outils DVF chargeables")
 except Exception as e:
     print(f"❌ Erreur outils: {e}")

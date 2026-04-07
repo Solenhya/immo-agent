@@ -63,9 +63,10 @@ L'agent support les demandes comme :
 
 ```
 immo-agent/
-├── runIA.py          # Définition des outils IA (DVF, estimations)
-├── api.py            # API FastAPI web
-├── main.py           # CLI chat (WIP - dépendances manquantes)
+├── immo_agent/       # code Python principal (package)
+│   ├── runIA.py          # Définition des outils IA (DVF, estimations)
+│   ├── api.py            # API FastAPI web
+│   ├── main.py           # CLI chat (WIP - dépendances manquantes)
 ├── frontend/         # Interface web React
 ├── data/
 │   └── immo_ventes.db  # Base de données SQLite

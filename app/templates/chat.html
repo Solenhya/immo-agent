@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mon Agent Immo</title>
+</head>
+<body>
+    <h1>Interface de Chat - Agent Immobilier</h1>
+    <div id="chat" style="border: 1px solid #ccc; height: 300px; padding: 10px; overflow-y: scroll;">
+        </div>
+    <input type="text" id="msg" placeholder="Posez votre question...">
+    <button onclick="send()">Envoyer</button>
+
+    <script>
+        async function send() {
+            const input = document.getElementById('msg');
+            const chat = document.getElementById('chat');
+            chat.innerHTML += `<p><b>Vous:</b> ${input.value}</p>`;
+            
+            const response = await fetch('/chat', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({message: input.value})
+            });
+            const data = await response.json();
+            chat.innerHTML += `<p><b>Agent:</b> ${data.response}</p>`;
+            input.value = '';
+        }
+    </script>
+</body>
+</html>

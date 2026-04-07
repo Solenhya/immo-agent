@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Response, Request, Cookie, HTTPException
 from pydantic import BaseModel
-import db_session
+from . import db_session
 # On importe la fonction de chat de ton projet
 from agent_memory import interroger_agent 
 

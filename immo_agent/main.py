@@ -8,7 +8,7 @@ from langchain_mcp_adapters.tools import load_mcp_tools
 from langgraph.prebuilt import create_react_agent
 from langchain_core.messages import SystemMessage, HumanMessage
 
-from runIA import (
+from .runIA import (
     outil_dvf_historique, 
     outil_dvf_estimation, 
     outil_infos_ville,

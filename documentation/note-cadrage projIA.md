@@ -153,9 +153,63 @@ A décider "product owner" (responsable de l'intégrité du produit)
 
 ---
 
-## 7. Critères de succès
+## 7. Sources de données - Évaluation
 
-### 7.1 Minimum Viable Product (MVP)
+### 7.1 API DVF (Demandes de Valeurs Foncières)
+
+| Critère | Évaluation |
+|:---|:---|
+| **URL / Accès** | https://www.data.gouv.fr/fr/datasets/demandes-de-valeurs-foncieres/ |
+| **Type d'accès** | ☑️ Téléchargement de fichiers |
+| **Format des données** | ☑️ CSV |
+| **Données disponibles** | Historique complet des transactions immobilières en France : prix, surface, type de bien, localisation, date de mutation, etc. |
+| **Limitations** | Mise à jour mensuelle/trimestrielle ; données anonymisées ; ~2-3 mois de délai avant intégration |
+| **Qualité des données** | ☑️ Excellente - Source officielle (DGFIP) |
+| **Mise à jour / Fraîcheur** | Données actualisées tous les 1-2 mois ; dernière mise à jour 2025 S1 |
+| **Documentation** | ☑️ Excellente - Dictionnaire complet et guides d'utilisation fournis |
+| **Difficulté d'intégration** | ☑️ Facile - CSV standardisé, importable directement en SQLite |
+
+### 7.2 Autre source 1 : API Communes (geo.api.gouv.fr)
+
+| Critère | Évaluation |
+|:---|:---|
+| **URL / Accès** | https://geo.api.gouv.fr |
+| **Type d'accès** | ☑️ API REST |
+| **Format des données** | ☑️ JSON |
+| **Données disponibles** | Population, géolocalisation, code postal, région, département de chaque commune française |
+| **Limitations** | Pas de rate limit documenté ; réponses rapides (<100ms) |
+| **Qualité des données** | ☑️ Excellente - Source officielle INSEE |
+| **Mise à jour / Fraîcheur** | Mise à jour annuelle ; données 2024 actuelles |
+| **Documentation** | ☑️ Excellente - API simple et bien documentée |
+| **Difficulté d'intégration** | ☑️ Très facile - Appels REST directs, pas d'authentification |
+
+### 7.3 Autre source 2 : [À déterminer - Météo / Transports / Commerces]
+
+| Critère | Évaluation |
+|:---|:---|
+| **URL / Accès** | À définir selon besoin futur |
+| **Type d'accès** | ☐ API REST ☐ Téléchargement ☐ Base de données ☐ Autre |
+| **Format des données** | À définir |
+| **Données disponibles** | Compléments potentiels : données météo, réseau transport, commerces proches |
+| **Limitations** | À évaluer |
+| **Qualité des données** | À évaluer |
+| **Mise à jour / Fraîcheur** | À évaluer |
+| **Documentation** | À évaluer |
+| **Difficulté d'intégration** | À évaluer |
+
+### 7.4 Synthèse des sources retenues
+
+| Source | Données utilisées | Méthode d'intégration | Priorité |
+|:---|:---|:---|:---|
+| **DVF** | Prix au m², historique ventes, types bien | Import CSV → SQLite (`csv_to_sqlite.py`) | ☑️ **Haute** |
+| **API Communes** | Population, géolocalisation | Appels API REST directs (outil `outil_infos_ville`) | ☑️ **Haute** |
+| **Métadonnées** | Données utilisateur, historique conversations | SQLite (sessions, memory.db) | ☑️ **Haute** |
+
+---
+
+## 8. Critères de succès
+
+### 8.1 Minimum Viable Product (MVP)
 
 *Ce que vous considérez comme le "minimum acceptable" pour vendredi :*
 
@@ -164,7 +218,7 @@ A décider "product owner" (responsable de l'intégrité du produit)
 - [ ] Agent utilise outil estimation
 - [ ] Interface utilisateur
 
-### 7.2 Fonctionnalités "nice to have" (si temps)
+### 8.2 Fonctionnalités "nice to have" (si temps)
 
 - [ ] Autres outils : MCP gouv, 
 - [ ] Enregistrement conversation
@@ -174,7 +228,7 @@ A décider "product owner" (responsable de l'intégrité du produit)
 
 ---
 
-## 8. Validation
+## 9. Validation
 
 | | Nom | Date | Signature |
 |:---|:---|:---|:---|
@@ -184,7 +238,7 @@ A décider "product owner" (responsable de l'intégrité du produit)
 
 ---
 
-## 9. Annexes
+## 10. Annexes
 
 *Liens utiles, ressources, documentation, etc.*
 

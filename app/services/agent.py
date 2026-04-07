@@ -23,7 +23,7 @@ class HistoriqueVentesInput(BaseModel):
     location: str = Field(description="City name or coordinates")
     years: int = Field(description="Number of past years to consider")
 
-class BienSimilairesInput(BaseModel):
+class BienSimilairesInput(BaseModel): 
     """Input for searching similar properties within a range."""
     ville: str = Field(description="City name")
     surface_min: float = Field(description="Minimum surface area in square meters")

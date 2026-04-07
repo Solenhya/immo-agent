@@ -1,5 +1,6 @@
 import os
 import uvicorn
+from pathlib import Path
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
@@ -7,7 +8,7 @@ from pydantic import BaseModel
 from langchain_core.messages import SystemMessage, HumanMessage, ToolMessage
 import json
 
-from runIA import (
+from .runIA import (
     model, 
     outil_dvf_historique, 
     outil_dvf_estimation, 
@@ -17,6 +18,10 @@ from runIA import (
 
 app = FastAPI(title="Solenhya Immo Agent API")
 
+# Déterminer le chemin du dossier frontend
+API_DIR = Path(__file__).parent.parent
+FRONTEND_DIR = API_DIR / "frontend"
+
 prompt = PROMPT_CENTRAL
 
 
@@ -25,6 +30,21 @@ model_with_tools = model.bind_tools(dvf_tools)
 
 class ChatRequest(BaseModel):
     message: str
+
+class LoginRequest(BaseModel):
+    email: str
+
+@app.post("/api/login")
+async def login_endpoint(req: LoginRequest):
+    """Simple login endpoint - just validates email format"""
+    try:
+        if not req.email or "@" not in req.email:
+            return {"status": "error", "message": "Email invalide"}
+        
+        # Pour l'instant on accepte tout email valide
+        return {"status": "success", "message": "Connecté", "email": req.email}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
 
 @app.post("/api/chat")
 async def chat_endpoint(req: ChatRequest):
@@ -75,12 +95,13 @@ async def chat_endpoint(req: ChatRequest):
         return {"reply": f"Erreur : {str(e)}"}
 
 
-os.makedirs("frontend", exist_ok=True)
-app.mount("/static", StaticFiles(directory="frontend"), name="static")
+# Servir les fichiers frontend
+if FRONTEND_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
 
 @app.get("/")
 async def root():
-    return FileResponse("frontend/index.html")
+    return FileResponse(str(FRONTEND_DIR / "index.html"))
 
 if __name__ == "__main__":
     uvicorn.run("api:app", host="127.0.0.1", port=8000, reload=True)

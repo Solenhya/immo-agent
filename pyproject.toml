@@ -12,8 +12,12 @@ description = "Application d'agent IA pour l'immobilier"
 authors = [{name = "Herry Fabien", email = "fabien_herry@yahoo.fr"},{"name"="Arnaud Rambourd"}]
 license = {text = "Undefined"}
 dependencies = [
-"python-dotenv",
-"langchain",
-"langchain-mistralai",
-"psycopg[binary]"
+    "python-dotenv",
+    "langchain",
+    "langchain-mistralai",
+    "psycopg[binary]",
+    "fastmcp>=3.2.0",
+    "fastapi",
+    "uvicorn",
+    "requests",
 ]

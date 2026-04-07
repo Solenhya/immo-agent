@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.prebuilt import create_react_agent
 from langchain_mistralai import ChatMistralAI
-from runIA import outil_dvf_historique, outil_dvf_estimation, outil_infos_ville, PROMPT_CENTRAL
+from .runIA import outil_dvf_historique, outil_dvf_estimation, outil_infos_ville, PROMPT_CENTRAL
 
 load_dotenv()
 
